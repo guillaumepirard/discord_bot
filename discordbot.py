@@ -30,8 +30,16 @@ async def usersList(ctx, role_wanted):
                     print(member.name + ' is not a ' + role.name)
         except:
             print("no members")
+
+    # display the success message on Discord
+    embed = discord.Embed(timestamp=ctx.message.created_at)
+    embed.add_field(name="Users with role '" + role_wanted + "' :", value=users)
+
+    await ctx.send(embed=embed)
+
+    # Create the CSV file
     df = pd.DataFrame(users, columns= ["Users with role '" + role_wanted + "'"])
-    df.to_csv ('export_dataframe.csv', index = False, header=True)
+    df.to_csv ('export_data.csv', index = False, header=True)
     print (df)
 
 bot.run("OTU1NTIzNDA3MDQ1MzUzNTQz.Yji6hQ.5vICSyxRcDS-LuxRAOfbm47Dh1w")
